@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <Version>4.0.120</Version>
+	  <AssemblyVersion>$(Version)</AssemblyVersion>
+	  <FileVersion>$(Version)</FileVersion>
+	  <PackageVersion>$(Version)</PackageVersion>
+	  <RootNamespace>Fiscalapi.XmlDownloader</RootNamespace>
+	  <AssemblyName>Fiscalapi.XmlDownloader</AssemblyName>
+	  <PackageId>Fiscalapi.XmlDownloader</PackageId>
+	  <Authors>Fiscalapi</Authors>
+	  <PackageIcon>fiscalapi.png</PackageIcon>
+	  <Summary>Descarga masiva de xml o metadata de facturas CFDI</Summary>
+	  <PackageTags>factura cfdi descarga-masiva-xml sat</PackageTags>
+	  <Title>Descarga Masiva de XML del SAT</Title>
+	  <Owners>Fiscalapi</Owners>
+	  <ApplicationIcon>fiscalapi.ico</ApplicationIcon>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Company>FISCAL API S DE R.L DE C.V</Company>
+	  <Copyright>FISCAL API S DE R.L DE C.V © 2019</Copyright>
+	  <PackageProjectUrl>https://www.fiscalapi.com</PackageProjectUrl>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <RepositoryUrl>https://github.com/FiscalAPI/xml-downloader</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="fiscalapi.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Fiscalapi.Credentials" Version="4.0.95" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="fiscalapi.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="README.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+</Project>
