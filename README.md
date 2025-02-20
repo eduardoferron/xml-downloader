@@ -77,17 +77,35 @@ Cada servicio (`Authenticate`, `Query`, `Verify`, `Download`) contiene:
 
 ## Ejemplos de Uso
 
-Consulte la carpeta `samples/WinFormApp` para ejemplos detallados de implementación en diferentes tipos de aplicaciones (.NET 8).
+Consulte [la rama master](https://github.com/FiscalAPI/xml-downloader/tree/master) para ejemplos detallados de uso.
 
 ## Compatibilidad
 
 - Compatible con .NET 8
 - Soporta aplicaciones Windows Forms, Console y Web
-- Seguimos [Versionado Semántico 2.0.0](docs/SEMVER.md)
+- Seguimos Versionado Semántico 2.0.0
 
-## Contribuciones
 
-Las contribuciones son bienvenidas. Por favor lea [CONTRIBUTING][] para más detalles y revise los archivos [TODO][] y [CHANGELOG][].
+## 🤝 Contribuir
+
+1. Haz un fork del repositorio.  
+2. Crea una rama para tu feature: `git checkout -b feature/AmazingFeature`.  
+3. Realiza commits de tus cambios: `git commit -m 'Add some AmazingFeature'`.  
+4. Sube tu rama: `git push origin feature/AmazingFeature`.  
+5. Abre un Pull Request en GitHub.
+
+
+## 🐛 Reportar Problemas
+
+1. Asegúrate de usar la última versión del SDK.  
+2. Verifica si el problema ya fue reportado.  
+3. Proporciona un ejemplo mínimo reproducible.  
+4. Incluye los mensajes de error completos.
+
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia **MPL**. Consulta el archivo [LICENSE](LICENSE.txt) para más detalles.
 
 ## Roadmap
 
