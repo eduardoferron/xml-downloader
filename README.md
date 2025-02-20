@@ -5,14 +5,6 @@
 [![License](https://img.shields.io/github/license/FiscalAPI/xml-downloader)](https://github.com/FiscalAPI/xml-downloader/blob/main/LICENSE)
 
 
-
----
-:us: The documentation of this project is in Spanish as this is the natural language for intended audience.
-
-:mexico: La documentación del proyecto está en español porque ese es el lenguaje principal de los usuarios.
-
----
-
 ## Descripción
 
 Librería .NET para consultar y descargar facturas (CFDI) emitidas y recibidas a través del servicio web del SAT, incluyendo la obtención de metadata. Este servicio es parte del sistema "Consulta y recuperación de comprobantes" del SAT ([documentación oficial](https://www.sat.gob.mx/consultas/42968/consulta-y-recuperacion-de-comprobantes-(nuevo))).
