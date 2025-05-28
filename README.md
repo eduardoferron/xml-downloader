@@ -20,7 +20,7 @@ Librería .NET para consultar y descargar facturas (CFDI) emitidas y recibidas a
 ## Instalación
 
 ```shell
-NuGet\Install-Package Fiscalapi.Credentials
+NuGet\Install-Package Fiscalapi.XmlDownloader
 ```
 
 :warning: Esta librería depende de [Fiscalapi.Credentials](https://github.com/FiscalAPI/fiscalapi-credentials-net). Se recomienda leer su documentación antes de continuar. 
