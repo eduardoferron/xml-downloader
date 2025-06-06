@@ -4,9 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <Version>4.0.120</Version>
-	  <AssemblyVersion>$(Version)</AssemblyVersion>
-	  <FileVersion>$(Version)</FileVersion>
+	  <Version>4.1.2</Version>
+	  <AssemblyVersion>4.1.0</AssemblyVersion>
+	  <FileVersion>4.1.0</FileVersion>
 	  <PackageVersion>$(Version)</PackageVersion>
 	  <RootNamespace>Fiscalapi.XmlDownloader</RootNamespace>
 	  <AssemblyName>Fiscalapi.XmlDownloader</AssemblyName>
@@ -23,7 +23,7 @@
 	  <Copyright>FISCAL API S DE R.L DE C.V © 2019</Copyright>
 	  <PackageProjectUrl>https://www.fiscalapi.com</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
-	  <RepositoryUrl>https://github.com/FiscalAPI/xml-downloader</RepositoryUrl>
+	  <RepositoryUrl>https://github.com/kodermx/xml-downloader</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 
   </PropertyGroup>
@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Fiscalapi.Credentials" Version="4.0.95" />
+	  <PackageReference Include="Fiscalapi.Credentials" Version="4.0.96" />
 	</ItemGroup>
 
 	<ItemGroup>

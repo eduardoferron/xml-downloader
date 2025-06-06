@@ -5,6 +5,9 @@
         Authenticate,
         Query,
         Verify,
-        Download
+        Download,
+        QueryEmitter,
+        QueryReceiver,
+        QueryFolio
     }
 }

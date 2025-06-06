@@ -102,8 +102,8 @@ public class XmlService
             parameters.StartDate.ToSatFormat(),
             parameters.EndDate.ToSatFormat(),
             parameters.EmitterRfc,
-            parameters.ReceiverRfc,
-            parameters.RequestType.ToString(),
+			parameters.ReceiverRfc,
+			parameters.RequestType.ToString(),
             parameters.DownloadType.ToString(),
             token);
 
@@ -131,7 +131,202 @@ public class XmlService
         return queryResult;
     }
 
-    public async Task<VerifyResult> Verify(string? requestUuid, AuthenticateResult token)
+	public async Task<QueryResult> QueryEmitter(string startDate, string endDate, string? emitterRfc, string[]? receiverRfc,
+		string requestType, AuthenticateResult token)
+	{
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryEmitter(
+			startDate,
+			endDate,
+			emitterRfc,
+			receiverRfc,
+			requestType,
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryEmitter(string startDate, string endDate, string? emitterRfc, string[]? receiverRfc,
+		string requestType)
+	{
+		var token = await GetCurrentToken();
+
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryEmitter(
+			startDate,
+			endDate,
+			emitterRfc,
+			receiverRfc,
+			requestType,
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryEmitter(QueryParameters parameters, AuthenticateResult token)
+	{
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryEmitter(
+			parameters.StartDate.ToSatFormat(),
+			parameters.EndDate.ToSatFormat(),
+			parameters.EmitterRfc,
+			parameters.ReceiverRfcs,
+			parameters.RequestType.ToString(),
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryEmitter(QueryParameters parameters)
+	{
+		var token = await GetCurrentToken();
+
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryEmitter(
+			parameters.StartDate.ToSatFormat(),
+			parameters.EndDate.ToSatFormat(),
+			parameters.EmitterRfc,
+			parameters.ReceiverRfcs,
+			parameters.RequestType.ToString(),
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryReceiver(string startDate, string endDate, string? receiverRfc,
+		string requestType, AuthenticateResult token)
+	{
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryReceiver(
+			startDate,
+			endDate,
+			receiverRfc,
+			requestType,
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryReceiver(string startDate, string endDate, string? receiverRfc,
+		string requestType)
+	{
+		var token = await GetCurrentToken();
+
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryReceiver(
+			startDate,
+			endDate,
+			receiverRfc,
+			requestType,
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryReceiver(QueryParameters parameters, AuthenticateResult token)
+	{
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryReceiver(
+			parameters.StartDate.ToSatFormat(),
+			parameters.EndDate.ToSatFormat(),
+			parameters.ReceiverRfc,
+			parameters.RequestType.ToString(),
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryReceiver(QueryParameters parameters)
+	{
+		var token = await GetCurrentToken();
+
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryReceiver(
+			parameters.StartDate.ToSatFormat(),
+			parameters.EndDate.ToSatFormat(),
+			parameters.ReceiverRfc,
+			parameters.RequestType.ToString(),
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryFolio(string folio, AuthenticateResult token)
+	{
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryFolio(
+			folio,
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryFolio(string folio)
+	{
+		var token = await GetCurrentToken();
+
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		var queryResult = await service.QueryFolio(
+			folio,
+			token);
+
+		return queryResult;
+	}
+
+	public async Task<QueryResult> QueryFolio(QueryParameters parameters, AuthenticateResult token)
+	{
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		if (!string.IsNullOrEmpty(parameters.Folio))
+		{
+			var queryResult = await service.QueryFolio(
+			parameters.Folio,
+			token);
+
+			return queryResult;
+		}
+
+		return new QueryResult() { 
+			IsSuccess = false,
+			Message = "Folio can not be null",
+			StatusCode = "301"
+		};
+	}
+
+	public async Task<QueryResult> QueryFolio(QueryParameters parameters)
+	{
+		var token = await GetCurrentToken();
+
+		var service = new QueryService(soapEnvelopeBuilder);
+
+		if (!string.IsNullOrEmpty(parameters.Folio))
+		{
+			var queryResult = await service.QueryFolio(
+			parameters.Folio,
+			token);
+
+			return queryResult;
+		}
+
+		return new QueryResult()
+		{
+			IsSuccess = false,
+			Message = "Folio can not be null",
+			StatusCode = "301"
+		};
+	}
+
+	public async Task<VerifyResult> Verify(string? requestUuid, AuthenticateResult token)
     {
         if (string.IsNullOrEmpty(requestUuid))
             throw new ArgumentNullException(nameof(requestUuid));

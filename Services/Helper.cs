@@ -44,7 +44,28 @@ namespace Fiscalapi.XmlDownloader.Services
                 Uri = "https://cfdidescargamasivasolicitud.clouda.sat.gob.mx/SolicitaDescargaService.svc",
                 SoapAction = "http://DescargaMasivaTerceros.sat.gob.mx/ISolicitaDescargaService/SolicitaDescarga"
             },
-            new Endpoint
+			new Endpoint
+			{
+				EndPointName = EndPointName.QueryEmitter,
+				EndPointType = EndPointType.OrdinaryCfdi,
+				Uri = "https://cfdidescargamasivasolicitud.clouda.sat.gob.mx/SolicitaDescargaService.svc",
+				SoapAction = "http://DescargaMasivaTerceros.sat.gob.mx/ISolicitaDescargaService/SolicitaDescargaEmitidos"
+			},
+			new Endpoint
+			{
+				EndPointName = EndPointName.QueryReceiver,
+				EndPointType = EndPointType.OrdinaryCfdi,
+				Uri = "https://cfdidescargamasivasolicitud.clouda.sat.gob.mx/SolicitaDescargaService.svc",
+				SoapAction = "http://DescargaMasivaTerceros.sat.gob.mx/ISolicitaDescargaService/SolicitaDescargaRecibidos"
+			},
+			new Endpoint
+			{
+				EndPointName = EndPointName.QueryFolio,
+				EndPointType = EndPointType.OrdinaryCfdi,
+				Uri = "https://cfdidescargamasivasolicitud.clouda.sat.gob.mx/SolicitaDescargaService.svc",
+				SoapAction = "http://DescargaMasivaTerceros.sat.gob.mx/ISolicitaDescargaService/SolicitaDescargaFolio"
+			},
+			new Endpoint
             {
                 EndPointName = EndPointName.Verify,
                 EndPointType = EndPointType.OrdinaryCfdi,
@@ -106,7 +127,22 @@ namespace Fiscalapi.XmlDownloader.Services
             return GetEndPoint(EndPointName.Query, EndPointType.OrdinaryCfdi);
         }
 
-        public static Endpoint GetVerifyEndPoint()
+		public static Endpoint GetQueryEmitterEndPoint()
+		{
+			return GetEndPoint(EndPointName.QueryEmitter, EndPointType.OrdinaryCfdi);
+		}
+
+		public static Endpoint GetQueryReceiverEndPoint()
+		{
+			return GetEndPoint(EndPointName.QueryReceiver, EndPointType.OrdinaryCfdi);
+		}
+
+		public static Endpoint GetQueryFolioEndPoint()
+		{
+			return GetEndPoint(EndPointName.QueryFolio, EndPointType.OrdinaryCfdi);
+		}
+
+		public static Endpoint GetVerifyEndPoint()
         {
             return GetEndPoint(EndPointName.Verify, EndPointType.OrdinaryCfdi);
         }
@@ -260,7 +296,100 @@ namespace Fiscalapi.XmlDownloader.Services
             return result;
         }
 
-        public static VerifyResult GetVerifyResult(string? rawResponse)
+		public static QueryResult GetQueryEmitterResult(string? rawResponse)
+		{
+			var result = new QueryResult();
+
+			if (string.IsNullOrEmpty(rawResponse)) return result;
+
+
+			var xmlDoc = new XmlDocument();
+			xmlDoc.LoadXml(rawResponse);
+
+
+			result.StatusCode = xmlDoc.GetElementsByTagName("SolicitaDescargaEmitidosResult")[0]
+				?.Attributes?["CodEstatus"]
+				?.Value;
+
+			result.Message =
+				xmlDoc.GetElementsByTagName("SolicitaDescargaEmitidosResult")[0]?.Attributes?["Mensaje"]?.Value;
+
+			result.RequestUuid = xmlDoc.GetElementsByTagName("SolicitaDescargaEmitidosResult")[0]
+				?.Attributes?["IdSolicitud"]
+				?.Value;
+
+
+			if (result.StatusCode is null || result.Message is null || result.RequestUuid is null)
+				return result;
+
+			result.IsSuccess = string.Equals(result.StatusCode, "5000") && result.RequestUuid is not null;
+
+			return result;
+		}
+
+		public static QueryResult GetQueryReceiverResult(string? rawResponse)
+		{
+			var result = new QueryResult();
+
+			if (string.IsNullOrEmpty(rawResponse)) return result;
+
+
+			var xmlDoc = new XmlDocument();
+			xmlDoc.LoadXml(rawResponse);
+
+
+			result.StatusCode = xmlDoc.GetElementsByTagName("SolicitaDescargaRecibidosResult")[0]
+				?.Attributes?["CodEstatus"]
+				?.Value;
+
+			result.Message =
+				xmlDoc.GetElementsByTagName("SolicitaDescargaRecibidosResult")[0]?.Attributes?["Mensaje"]?.Value;
+
+			result.RequestUuid = xmlDoc.GetElementsByTagName("SolicitaDescargaRecibidosResult")[0]
+				?.Attributes?["IdSolicitud"]
+				?.Value;
+
+
+			if (result.StatusCode is null || result.Message is null || result.RequestUuid is null)
+				return result;
+
+			result.IsSuccess = string.Equals(result.StatusCode, "5000") && result.RequestUuid is not null;
+
+			return result;
+		}
+
+		public static QueryResult GetQueryFolioResult(string? rawResponse)
+		{
+			var result = new QueryResult();
+
+			if (string.IsNullOrEmpty(rawResponse)) return result;
+
+
+			var xmlDoc = new XmlDocument();
+			xmlDoc.LoadXml(rawResponse);
+
+
+			result.StatusCode = xmlDoc.GetElementsByTagName("SolicitaDescargaFolioResult")[0]
+				?.Attributes?["CodEstatus"]
+				?.Value;
+
+			result.Message =
+				xmlDoc.GetElementsByTagName("SolicitaDescargaFolioResult")[0]?.Attributes?["Mensaje"]?.Value;
+
+			result.RequestUuid = xmlDoc.GetElementsByTagName("SolicitaDescargaFolioResult")[0]
+				?.Attributes?["IdSolicitud"]
+				?.Value;
+
+
+			if (result.StatusCode is null || result.Message is null || result.RequestUuid is null)
+				return result;
+
+			result.IsSuccess = string.Equals(result.StatusCode, "5000") && result.RequestUuid is not null;
+
+			return result;
+		}
+
+		public static VerifyResult GetVerifyResult(string? rawResponse)
         {
             var result = new VerifyResult();
 

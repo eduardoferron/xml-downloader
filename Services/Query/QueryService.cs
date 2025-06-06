@@ -49,5 +49,105 @@ namespace Fiscalapi.XmlDownloader.Services.Query
 
             return result;
         }
-    }
+
+		public async Task<QueryResult> QueryEmitter(string startDate, string endDate, string? emitterRfc, string[]? receiverRfc,
+			string requestType, AuthenticateResult token)
+		{
+			var rawRequest = soapEnvelopeBuilder.BuildQueryEmitter(
+				startDate,
+				endDate,
+				requestType,
+				emitterRfc,
+				receiverRfc);
+
+
+			var endpoint = Helper.GetQueryEmitterEndPoint();
+
+
+			var internalRequest = new InternalRequest
+			{
+				Url = endpoint.Uri,
+				SoapAction = endpoint.SoapAction,
+				RawRequest = rawRequest,
+				HttpMethod = HttpMethod.Post,
+				EndPointName = EndPointName.QueryEmitter,
+				Token = token
+			};
+
+
+			var internalResponse = await InternalHttpClient.SendAsync(internalRequest);
+
+
+			var result = Helper.GetQueryEmitterResult(internalResponse?.RawResponse);
+			result.InternalRequest = internalRequest;
+			result.InternalResponse = internalResponse;
+
+			return result;
+		}
+
+		public async Task<QueryResult> QueryReceiver(string startDate, string endDate, string? receiverRfc,
+			string requestType, AuthenticateResult token)
+		{
+			var rawRequest = soapEnvelopeBuilder.BuildQueryReceiver(
+				startDate,
+				endDate,
+				requestType,
+				receiverRfc);
+
+
+			var endpoint = Helper.GetQueryReceiverEndPoint();
+
+
+			var internalRequest = new InternalRequest
+			{
+				Url = endpoint.Uri,
+				SoapAction = endpoint.SoapAction,
+				RawRequest = rawRequest,
+				HttpMethod = HttpMethod.Post,
+				EndPointName = EndPointName.QueryReceiver,
+				Token = token
+			};
+
+
+			var internalResponse = await InternalHttpClient.SendAsync(internalRequest);
+
+
+			var result = Helper.GetQueryReceiverResult(internalResponse?.RawResponse);
+			result.InternalRequest = internalRequest;
+			result.InternalResponse = internalResponse;
+
+			return result;
+		}
+
+		public async Task<QueryResult> QueryFolio(string folio, AuthenticateResult token)
+		{
+			var rawRequest = soapEnvelopeBuilder.BuildQueryFolio(folio);
+
+
+			var endpoint = Helper.GetQueryFolioEndPoint();
+
+
+			var internalRequest = new InternalRequest
+			{
+				Url = endpoint.Uri,
+				SoapAction = endpoint.SoapAction,
+				RawRequest = rawRequest,
+				HttpMethod = HttpMethod.Post,
+				EndPointName = EndPointName.QueryFolio,
+				Token = token
+			};
+
+
+			var internalResponse = await InternalHttpClient.SendAsync(internalRequest);
+
+
+			var result = Helper.GetQueryFolioResult(internalResponse?.RawResponse);
+			result.InternalRequest = internalRequest;
+			result.InternalResponse = internalResponse;
+
+			return result;
+		}
+
+
+	}
 }
